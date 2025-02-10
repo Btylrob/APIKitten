@@ -235,7 +235,7 @@ func help() {
 
 	ClearTerm()
 	fmt.Println(limeGreen + `
-	API Key Manager - Secure Storage & Retrieval
+	API Kitten - Secure Storage & Retrieval
 
 Commands:
     -s, --store       Encrypt and store a new API key
