@@ -12,4 +12,14 @@ Install my-project with npm
   cd my-project
 ```
     
-## Features 
+## Commands
+```bash
+Commands:
+   -s, --store       Encrypt and store a new API key
+  	-r, --retrieve    Decrypt and display stored API keys
+	  -d, --delete 	    Deletes stored API key
+  	-l, --list        Show encrypted API keys
+  	-h, --help        Display this help menu
+	  -v, --version     Display version
+```
+
