@@ -13,6 +13,8 @@ Install my-project with npm
 ```
     
 ## Commands
+APIKitten focuses on simplicity using straight forward CLI commands to retrive and store API Keys. 
+
 ```bash
 Commands:
    -s, --store       Encrypt and store a new API key
