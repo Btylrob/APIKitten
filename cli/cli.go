@@ -189,7 +189,7 @@ func deleteAPIKeys() {
 		fmt.Printf("Is this the key you want to delete? %s (y/n): ", decryptedKey)
 		var response string
 		fmt.Scanln(&response)
-		if response != "y" {
+		if response != "y" && response != "Y" {
 			updatedKeys = append(updatedKeys, encryptedKey)
 		} else {
 			keyDeleted = true
@@ -211,6 +211,7 @@ func deleteAPIKeys() {
 	fmt.Printf("API key deleted successfully. %s", cat)
 }
 
+// clear terminal func
 func ClearTerm() {
 	var cmd *exec.Cmd
 	if runtime.GOOS == "windows" {
@@ -236,9 +237,6 @@ func help() {
 	fmt.Println(limeGreen + `
 	API Key Manager - Secure Storage & Retrieval
 
-Usage:
-  api_key_manager [command]
-
 Commands:
     -s, --store       Encrypt and store a new API key
   	-r, --retrieve    Decrypt and display stored API keys
@@ -246,12 +244,6 @@ Commands:
   	-l, --list        Show encrypted API keys
   	-h, --help        Display this help menu
 	-v, --version     Display version
-  
-
-Examples:
-  api_key_manager store
-  api_key_manager retrieve
-  api_key_manager list
 
 Notes:
 - API keys are encrypted using AES-256-GCM.
