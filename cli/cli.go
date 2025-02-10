@@ -13,7 +13,11 @@ import (
 	"runtime"
 )
 
+// emojis and term-art
 var cat = "\U0001f431"
+
+// version
+var vers = "version=0.0.1, date=2025-02-10"
 
 type KeyStore struct {
 	EncryptedKeys []string `json:"encrypted_keys"`
@@ -218,6 +222,11 @@ func ClearTerm() {
 	_ = cmd.Run()
 }
 
+func version() {
+	ClearTerm()
+	fmt.Println(vers)
+}
+
 func help() {
 
 	limeGreen := "\033[92m"
@@ -231,11 +240,13 @@ Usage:
   api_key_manager [command]
 
 Commands:
-  store       Encrypt and store a new API key
-  retrieve    Decrypt and display stored API keys
-  list        Show encrypted API keys
-  help        Display this help menu
-  exit        Quit the program
+    -s, --store       Encrypt and store a new API key
+  	-r, --retrieve    Decrypt and display stored API keys
+	-d, --delete 	  Deletes stored API key
+  	-l, --list        Show encrypted API keys
+  	-h, --help        Display this help menu
+	-v, --version     Display version
+  
 
 Examples:
   api_key_manager store
@@ -282,6 +293,7 @@ COMMANDS:
 	-d, --delete 	  Deletes stored API key
   	-l, --list        Show encrypted API keys
   	-h, --help        Display this help menu
+	-v, --version     Display version
 	`)
 
 	for {
@@ -299,6 +311,8 @@ COMMANDS:
 			listEncryptedKeys()
 		case "-h", "--help":
 			help()
+		case "-v", "--version":
+			version()
 		case "c", "--close":
 			os.Exit(0)
 		default:
