@@ -1,4 +1,4 @@
-
+![Colored ASCII Art](demo/image.png)
 # What is it?
 
 
