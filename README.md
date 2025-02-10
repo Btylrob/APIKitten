@@ -1,12 +1,7 @@
 ![Colored ASCII Art](demo/image.png)
 # What is it?
-
- A Golang CLI that I built over the weekend to solve my problem of storing API Keys on photo apps or other easily compromisable applications.
-
- Non-technical user frinedly install and run!
-
- API Kitten uses [Advanced Encryption Standard (AES) library](https://pkg.go.dev/crypto/aes) to encrypt and decrypt entered keys.
-
+ APIKitten is an open-source command line program that I built over the weekend to solve my problem of storing API keys in compormisable applications.
+ This CLI helps store and retrieve api keys using diffrienetial password protection and [AES Go library](https://pkg.go.dev/crypto/aes) to encrpyt sensitive data...
 
 ## Installation
 
