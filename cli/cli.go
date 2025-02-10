@@ -235,7 +235,7 @@ func help() {
 
 	ClearTerm()
 	fmt.Println(limeGreen + `
-	API Kitten - Secure Storage & Retrieval
+	API Kitten - Secure API Storage & Retrieval
 
 Commands:
     -s, --store       Encrypt and store a new API key
@@ -250,7 +250,7 @@ Notes:
 - You must provide the correct password to decrypt keys.
 - Encrypted keys are stored in 'api_keys.json'.
 
-For more information, visit: https://yourprojectdocs.example
+For more information, visit: https://github.com/Btylrob/APIKitten
 	` + resetColor)
 }
 
