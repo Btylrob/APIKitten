@@ -15,16 +15,36 @@ import (
 
 // emojis and term-art
 var cat = "\U0001f431"
+var locked = "\U0001F512"
 
 // version
-var vers = "version=0.0.1, date=2025-02-10"
+var vers = "apikitten version 0.0.1"
 
 type KeyStore struct {
 	EncryptedKeys []string `json:"encrypted_keys"`
 }
 
+// json file store
 const keyFile = "api_keys.json"
 
+// clear term / version
+func ClearTerm() {
+	var cmd *exec.Cmd
+	if runtime.GOOS == "windows" {
+		cmd = exec.Command("cmd", "/c", "cls")
+	} else {
+		cmd = exec.Command("clear")
+	}
+	cmd.Stdout = os.Stdout
+	_ = cmd.Run()
+}
+
+func version() {
+	ClearTerm()
+	fmt.Println(vers)
+}
+
+// encrypt and decrypt
 func encrypt(text, password string) (string, error) {
 	key := deriveKey(password)
 	block, err := aes.NewCipher(key)
@@ -71,6 +91,7 @@ func decrypt(encryptedText, password string) (string, error) {
 	return string(plaintext), nil
 }
 
+// cmds retrieve / store / delete / help
 func deriveKey(password string) []byte {
 	key := make([]byte, 32)
 	copy(key, password)
@@ -134,16 +155,17 @@ func retrieveAPIKeys() {
 
 	ClearTerm()
 
+	store, _ := loadKeys()
+
 	var password string
 	fmt.Print("Enter decryption password: ")
 	fmt.Scanln(&password)
 
-	store, _ := loadKeys()
 	fmt.Println("Decrypted API Keys:")
 	for _, encryptedKey := range store.EncryptedKeys {
 		decryptedKey, err := decrypt(encryptedKey, password)
 		if err != nil {
-			fmt.Println("Error decrypting key or incorrect password.")
+			fmt.Println("Locked", locked)
 		} else {
 			fmt.Println(decryptedKey)
 		}
@@ -211,23 +233,6 @@ func deleteAPIKeys() {
 	fmt.Printf("API key deleted successfully. %s", cat)
 }
 
-// clear terminal func
-func ClearTerm() {
-	var cmd *exec.Cmd
-	if runtime.GOOS == "windows" {
-		cmd = exec.Command("cmd", "/c", "cls")
-	} else {
-		cmd = exec.Command("clear")
-	}
-	cmd.Stdout = os.Stdout
-	_ = cmd.Run()
-}
-
-func version() {
-	ClearTerm()
-	fmt.Println(vers)
-}
-
 func help() {
 
 	limeGreen := "\033[92m"
@@ -254,6 +259,7 @@ For more information, visit: https://github.com/Btylrob/APIKitten
 	` + resetColor)
 }
 
+// start terminal menu
 func Start() {
 
 	fmt.Println(` 
