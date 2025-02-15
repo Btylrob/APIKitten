@@ -1,3 +1,0 @@
--[] Make API Locker on retrive passwords show API usecase
--[ ] Make Graphical Interface using bubble tea and ascii
--[ ] Ship 
