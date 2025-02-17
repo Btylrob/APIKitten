@@ -17,6 +17,9 @@ import (
 var cat = "\U0001f431"
 var locked = "\U0001F512"
 
+var ansiPink = "\033[1;95m"
+var resetColor = "\033[0m" // Reset to default terminal color
+
 // version
 var vers = "apikitten version 0.0.1"
 
@@ -66,6 +69,7 @@ func encrypt(text, password string) (string, error) {
 }
 
 func decrypt(encryptedText, password string) (string, error) {
+
 	key := deriveKey(password)
 	data, err := base64.StdEncoding.DecodeString(encryptedText)
 	if err != nil {
@@ -129,14 +133,14 @@ func storeAPIKey() {
 
 	var apiKey, password string
 
-	fmt.Print("Enter API key: ")
+	fmt.Print(ansiPink + "Enter API key: ")
 	fmt.Scanln(&apiKey)
-	fmt.Print("Enter encryption password: ")
+	fmt.Print(ansiPink + "Enter encryption password: ")
 	fmt.Scanln(&password)
 
 	encryptedKey, err := encrypt(apiKey, password)
 	if err != nil {
-		fmt.Println("Error encrypting key:", err)
+		fmt.Println(ansiPink+"Error encrypting key:", err)
 		return
 	}
 
@@ -148,7 +152,7 @@ func storeAPIKey() {
 		return
 	}
 
-	fmt.Printf("API key stored securely.%s", cat)
+	fmt.Printf(ansiPink+"API key stored securely.%s", cat)
 }
 
 func retrieveAPIKeys() {
@@ -158,14 +162,15 @@ func retrieveAPIKeys() {
 	store, _ := loadKeys()
 
 	var password string
-	fmt.Print("Enter decryption password: ")
+	fmt.Print(ansiPink + "Enter decryption password: ")
 	fmt.Scanln(&password)
 
-	fmt.Println("Decrypted API Keys:")
+	ClearTerm()
+	fmt.Println(ansiPink + "Decrypted API Keys:")
 	for _, encryptedKey := range store.EncryptedKeys {
 		decryptedKey, err := decrypt(encryptedKey, password)
 		if err != nil {
-			fmt.Println("Locked", locked)
+			fmt.Println(ansiPink+"Locked", locked)
 		} else {
 			fmt.Println(decryptedKey)
 		}
@@ -177,7 +182,7 @@ func listEncryptedKeys() {
 	ClearTerm()
 
 	store, _ := loadKeys()
-	fmt.Println("Stored Encrypted API Keys:")
+	fmt.Println(ansiPink + "Stored Encrypted API Keys:")
 	for _, key := range store.EncryptedKeys {
 		fmt.Println(key)
 	}
@@ -188,12 +193,12 @@ func deleteAPIKeys() {
 	ClearTerm()
 
 	var password string
-	fmt.Print("Enter encryption password: ")
+	fmt.Print(ansiPink + "Enter encryption password: ")
 	fmt.Scanln(&password)
 
 	store, err := loadKeys()
 	if err != nil {
-		fmt.Println("Error loading keys:", err)
+		fmt.Println(ansiPink+"Error loading keys:", err)
 		return
 	}
 
@@ -208,7 +213,7 @@ func deleteAPIKeys() {
 			continue
 		}
 
-		fmt.Printf("Is this the key you want to delete? %s (y/n): ", decryptedKey)
+		fmt.Printf(ansiPink+"Is this the key you want to delete? %s (y/n): ", decryptedKey)
 		var response string
 		fmt.Scanln(&response)
 		if response != "y" && response != "Y" {
@@ -219,27 +224,24 @@ func deleteAPIKeys() {
 	}
 
 	if !keyDeleted {
-		fmt.Println("No API key was deleted.")
+		fmt.Println(ansiPink + "No API key was deleted.")
 		return
 	}
 
 	store.EncryptedKeys = updatedKeys
 	err = saveKeys(store)
 	if err != nil {
-		fmt.Println("Error saving updated keys:", err)
+		fmt.Println(ansiPink+"Error saving updated keys:", err)
 		return
 	}
 
-	fmt.Printf("API key deleted successfully. %s", cat)
+	fmt.Printf(ansiPink+"API key deleted successfully. %s", cat)
 }
 
 func help() {
 
-	limeGreen := "\033[92m"
-	resetColor := "\033[0m" // Reset to default terminal color
-
 	ClearTerm()
-	fmt.Println(limeGreen + `
+	fmt.Println(ansiPink + `
 	API Kitten - Secure API Storage & Retrieval
 
 Commands:
@@ -262,7 +264,7 @@ For more information, visit: https://github.com/Btylrob/APIKitten
 // start terminal menu
 func Start() {
 
-	fmt.Println(` 
+	fmt.Println(ansiPink + ` 
 	 ________  ________  ___                                       
     |\   __  \|\   __  \|\  \                                      
     \ \  \|\  \ \  \|\  \ \  \                                     
@@ -292,6 +294,7 @@ COMMANDS:
   	-l, --list        Show encrypted API keys
   	-h, --help        Display this help menu
 	-v, --version     Display version
+	-b, --back 		  Goes back to main menu
 	`)
 
 	for {
