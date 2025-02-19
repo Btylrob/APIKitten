@@ -8,7 +8,7 @@
 Install via go
 
 ```bash
-  go install 
+  go install github.com/Btylrob/APIKitten
 ```
     
 ## Commands
