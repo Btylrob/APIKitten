@@ -1,11 +1,13 @@
-package cli
+package main
 
 import (
 	"crypto/aes"
 	"crypto/cipher"
 	"crypto/rand"
+
 	"encoding/base64"
 	"encoding/json"
+
 	"fmt"
 	"io"
 	"os"
@@ -13,15 +15,21 @@ import (
 	"runtime"
 )
 
-// emojis and term-art
-var cat = "\U0001f431"
-var locked = "\U0001F512"
+// emojis / term-art / color code
 
-var ansiPink = "\033[1;95m"
-var resetColor = "\033[0m" // Reset to default terminal color
+const (
+	cat    = "\U0001f431"
+	locked = "\U0001F512"
+)
+
+const (
+	boldPink   = "\033[1;95m"
+	resetColor = "\033[0m" //default terminal color
+	boldWhite  = "\033[1;97m"
+)
 
 // version
-var vers = "apikitten version 0.0.1"
+const vers = "apikitten version 0.0.1"
 
 type KeyStore struct {
 	EncryptedKeys []string `json:"encrypted_keys"`
@@ -133,14 +141,14 @@ func storeAPIKey() {
 
 	var apiKey, password string
 
-	fmt.Print(ansiPink + "Enter API key: ")
+	fmt.Print(boldWhite + "Enter API key: ")
 	fmt.Scanln(&apiKey)
-	fmt.Print(ansiPink + "Enter encryption password: ")
+	fmt.Print(boldWhite + "Enter encryption password: ")
 	fmt.Scanln(&password)
 
 	encryptedKey, err := encrypt(apiKey, password)
 	if err != nil {
-		fmt.Println(ansiPink+"Error encrypting key:", err)
+		fmt.Println(boldPink+"Error encrypting key:", err)
 		return
 	}
 
@@ -152,7 +160,7 @@ func storeAPIKey() {
 		return
 	}
 
-	fmt.Printf(ansiPink+"API key stored securely.%s", cat)
+	fmt.Printf(boldWhite+"API key stored securely.%s", cat)
 }
 
 func retrieveAPIKeys() {
@@ -162,15 +170,15 @@ func retrieveAPIKeys() {
 	store, _ := loadKeys()
 
 	var password string
-	fmt.Print(ansiPink + "Enter decryption password: ")
+	fmt.Print(boldWhite + "Enter decryption password: ")
 	fmt.Scanln(&password)
 
 	ClearTerm()
-	fmt.Println(ansiPink + "Decrypted API Keys:")
+	fmt.Println(boldWhite + "Decrypted API Keys:")
 	for _, encryptedKey := range store.EncryptedKeys {
 		decryptedKey, err := decrypt(encryptedKey, password)
 		if err != nil {
-			fmt.Println(ansiPink+"Locked", locked)
+			fmt.Println(boldPink+"Locked", locked)
 		} else {
 			fmt.Println(decryptedKey)
 		}
@@ -182,7 +190,7 @@ func listEncryptedKeys() {
 	ClearTerm()
 
 	store, _ := loadKeys()
-	fmt.Println(ansiPink + "Stored Encrypted API Keys:")
+	fmt.Println(boldWhite + "Stored Encrypted API Keys:")
 	for _, key := range store.EncryptedKeys {
 		fmt.Println(key)
 	}
@@ -193,12 +201,12 @@ func deleteAPIKeys() {
 	ClearTerm()
 
 	var password string
-	fmt.Print(ansiPink + "Enter encryption password: ")
+	fmt.Print(boldWhite + "Enter encryption password: ")
 	fmt.Scanln(&password)
 
 	store, err := loadKeys()
 	if err != nil {
-		fmt.Println(ansiPink+"Error loading keys:", err)
+		fmt.Println(boldPink+"Error loading keys:", err)
 		return
 	}
 
@@ -213,7 +221,7 @@ func deleteAPIKeys() {
 			continue
 		}
 
-		fmt.Printf(ansiPink+"Is this the key you want to delete? %s (y/n): ", decryptedKey)
+		fmt.Printf(boldPink+"Is this the key you want to delete? %s (y/n): ", decryptedKey)
 		var response string
 		fmt.Scanln(&response)
 		if response != "y" && response != "Y" {
@@ -224,24 +232,24 @@ func deleteAPIKeys() {
 	}
 
 	if !keyDeleted {
-		fmt.Println(ansiPink + "No API key was deleted.")
+		fmt.Println(boldPink + "No API key was deleted.")
 		return
 	}
 
 	store.EncryptedKeys = updatedKeys
 	err = saveKeys(store)
 	if err != nil {
-		fmt.Println(ansiPink+"Error saving updated keys:", err)
+		fmt.Println(boldPink+"Error saving updated keys:", err)
 		return
 	}
 
-	fmt.Printf(ansiPink+"API key deleted successfully. %s", cat)
+	fmt.Printf(boldPink+"API key deleted successfully. %s", cat)
 }
 
 func help() {
 
 	ClearTerm()
-	fmt.Println(ansiPink + `
+	fmt.Println(boldPink + `
 	API Kitten - Secure API Storage & Retrieval
 
 Commands:
@@ -264,7 +272,7 @@ For more information, visit: https://github.com/Btylrob/APIKitten
 // start terminal menu
 func Start() {
 
-	fmt.Println(ansiPink + ` 
+	fmt.Println(boldPink + ` 
 	 ________  ________  ___                                       
     |\   __  \|\   __  \|\  \                                      
     \ \  \|\  \ \  \|\  \ \  \                                     
