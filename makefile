@@ -32,7 +32,7 @@ lint:
 # Clean up binaries
 clean:
 	@echo "Cleaning up..."
-	rm -f $(BINARY_NAME)
+	@if [ "$(OS)" = "Windows_NT" ]; then del $(BINARY_NAME).exe; else rm -f $(BINARY_NAME); fi
 
 # Install dependencies
 deps:
