@@ -5,11 +5,10 @@
 
 ## Installation
 
-Install my-project with npm
+Install via go
 
 ```bash
-  npm install my-project
-  cd my-project
+  go install github.com/Btylrob/APIKitten
 ```
     
 ## Commands
