@@ -38,7 +38,7 @@ type KeyStore struct {
 // json file store
 const keyFile = "api_keys.json"
 
-// clear term / version
+// clear term
 func ClearTerm() {
 	var cmd *exec.Cmd
 	if runtime.GOOS == "windows" {
@@ -50,6 +50,7 @@ func ClearTerm() {
 	_ = cmd.Run()
 }
 
+// version
 func version() {
 	ClearTerm()
 	fmt.Println(vers)
@@ -135,29 +136,6 @@ func loadKeys() (KeyStore, error) {
 	return store, err
 }
 
-func help() {
-
-	ClearTerm()
-	fmt.Println(boldPink + `
-	API Kitten - Secure API Storage & Retrieval
-
-Commands:
-    -s, --store       Encrypt and store a new API key
-  	-r, --retrieve    Decrypt and display stored API keys
-	-d, --delete 	  Deletes stored API key
-  	-l, --list        Show encrypted API keys
-  	-h, --help        Display this help menu
-	-v, --version     Display version
-
-Notes:
-- API keys are encrypted using AES-256-GCM.
-- You must provide the correct password to decrypt keys.
-- Encrypted keys are stored in 'api_keys.json'.
-
-For more information, visit: https://github.com/Btylrob/APIKitten
-	` + resetColor)
-}
-
 // start terminal menu
 func Start() {
 
@@ -211,7 +189,7 @@ COMMANDS:
 			help()
 		case "-v", "--version":
 			version()
-		case "c", "--close":
+		case "-c", "--close":
 			os.Exit(0)
 		default:
 			fmt.Println("Invalid option, try again.")
