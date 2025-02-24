@@ -55,7 +55,7 @@ COMMANDS:
 		case "-l", "--list":
 			listEncryptedKeys()
 		case "-h", "--help":
-			help()
+			Help()
 		case "-v", "--version":
 			version()
 		case "-c", "--close":
