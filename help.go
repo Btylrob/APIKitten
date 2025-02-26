@@ -70,19 +70,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			Start()
 		case "-s":
 			fmt.Println("\nStoring API keys...")
-			StoreAPI() // Call the function to store API keys
+			StoreAPI()
 		case "-r":
 			fmt.Println("\nRetrieving API Keys...")
 			retrieveAPIKeys()
 		case "-v":
 			fmt.Println("\nFetching Current Version...")
-			version() // Call the function to store API keys
+			version()
 		case "-d":
 			fmt.Println("\nDeleting API Keys...")
 			deleteAPIKeys()
 		case "-l":
 			fmt.Println("\nListing stored API keys...")
-			listEncryptedKeys() // Call the function to store API keys
+			listEncryptedKeys()
 		}
 	}
 

@@ -1,6 +1,10 @@
 package main
 
-import "fmt"
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
 
 func StoreAPI() {
 
@@ -9,9 +13,13 @@ func StoreAPI() {
 	var apiKey, password string
 
 	fmt.Print(boldWhite + "Enter API key: ")
-	fmt.Scanln(&apiKey)
+	reader := bufio.NewReader(os.Stdin)
+	apiKey, _ = reader.ReadString('\n')
+	apiKey = apiKey[:len(apiKey)-1]
+
 	fmt.Print(boldWhite + "Enter encryption password: ")
-	fmt.Scanln(&password)
+	password, _ = reader.ReadString('\n')
+	password = password[:len(password)-1]
 
 	encryptedKey, err := encrypt(apiKey, password)
 	if err != nil {
