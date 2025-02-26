@@ -24,8 +24,7 @@ func StoreAPI() {
 	apiKey = apiKey + " " + use
 
 	fmt.Print(boldWhite + "Enter encryption password: ")
-	password, _ = reader.ReadString('\n')
-	password = password[:len(password)-1]
+	fmt.Scanln(&password)
 
 	encryptedKey, err := encrypt(apiKey, password)
 	if err != nil {
