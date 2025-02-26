@@ -10,12 +10,18 @@ func StoreAPI() {
 
 	ClearTerm()
 
-	var apiKey, password string
+	var apiKey, password, use string
 
 	fmt.Print(boldWhite + "Enter API key: ")
 	reader := bufio.NewReader(os.Stdin)
 	apiKey, _ = reader.ReadString('\n')
 	apiKey = apiKey[:len(apiKey)-1]
+
+	fmt.Print(boldWhite + "Enter Use: ")
+	use, _ = reader.ReadString('\n')
+	use = use[:len(use)-1]
+
+	apiKey = apiKey + " " + use
 
 	fmt.Print(boldWhite + "Enter encryption password: ")
 	password, _ = reader.ReadString('\n')
