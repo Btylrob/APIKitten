@@ -99,7 +99,7 @@ func Help() {
 	ClearTerm()
 
 	fmt.Println("════════════════════════════════════════════════════════════════════════")
-	fmt.Println("             HELP MENU              ")
+	fmt.Println("                         HELP MENU              ")
 	fmt.Println("════════════════════════════════════════════════════════════════════════")
 	fmt.Println("Usage: ./app [COMMAND]")
 

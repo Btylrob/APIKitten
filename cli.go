@@ -7,6 +7,9 @@ import (
 
 // start terminal menu
 func Start() {
+
+	ClearTerm()
+
 	fmt.Println(boldPink + `
   ________  ________  ___                                       
  |\   __  \|\   __  \|\  \                                      
@@ -60,6 +63,8 @@ func Start() {
 			Help()
 		case "-v", "--version":
 			version()
+		case "-b", "--back":
+			Start()
 		case "-c", "--close":
 			os.Exit(0)
 		default:
