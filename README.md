@@ -5,7 +5,7 @@
 
 ## Demo
 
-![](.gif)
+![](demo/2025-02-27 07-51-59.gif)
 
 ## Installation
 
