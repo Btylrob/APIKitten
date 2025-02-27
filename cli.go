@@ -7,38 +7,40 @@ import (
 
 // start terminal menu
 func Start() {
+	fmt.Println(boldPink + `
+  ________  ________  ___                                       
+ |\   __  \|\   __  \|\  \                                      
+ \ \  \|\  \ \  \|\  \ \  \                                     
+  \ \   __  \ \   ____\ \  \                                    
+   \ \  \ \  \ \  \___|\ \  \                                   
+    \ \__\ \__\ \__\    \ \__\                                  
+     \|__|\|__|\|__|     \|__|                                                                                                           
+  ___  __    ___  _________  _________  _______   ________      
+ |\  \|\  \ |\  \|\___   ___\\___   ___\\  ___ \ |\   ___  \    
+ \ \  \/  /|\ \  \|___ \  \_\|___ \  \_\ \   __/|\ \  \\ \  \   
+  \ \   ___  \ \  \   \ \  \     \ \  \ \ \  \_|/_\ \  \\ \  \  
+   \ \  \\ \  \ \  \   \ \  \     \ \  \ \ \  \_|\ \ \  \\ \  \ 
+    \ \__\\ \__\ \__\   \ \__\     \ \__\ \ \_______\ \__\\ \__\
+     \|__| \|__|\|__|    \|__|      \|__|  \|_______|\|__| \|__|
+`)
 
-	fmt.Println(boldPink + ` 
-	 ________  ________  ___                                       
-    |\   __  \|\   __  \|\  \                                      
-    \ \  \|\  \ \  \|\  \ \  \                                     
-     \ \   __  \ \   ____\ \  \                                    
-      \ \  \ \  \ \  \___|\ \  \                                   
-       \ \__\ \__\ \__\    \ \__\                                  
-        \|__|\|__|\|__|     \|__|                                                                                                           
- ___  __    ___  _________  _________  _______   ________      
-|\  \|\  \ |\  \|\___   ___\\___   ___\\  ___ \ |\   ___  \    
-\ \  \/  /|\ \  \|___ \  \_\|___ \  \_\ \   __/|\ \  \\ \  \   
- \ \   ___  \ \  \   \ \  \     \ \  \ \ \  \_|/_\ \  \\ \  \  
-  \ \  \\ \  \ \  \   \ \  \     \ \  \ \ \  \_|\ \ \  \\ \  \ 
-   \ \__\\ \__\ \__\   \ \__\     \ \__\ \ \_______\ \__\\ \__\
-    \|__| \|__|\|__|    \|__|      \|__|  \|_______|\|__| \|__|
-	-CLI-based encryption tool for API keys and tokens.
-
-USAGE: 
-	A CLI locker for API keys and tokens using AES-256-GCM encryption.
-
-AUTHORS(S):
-	Bran Robinson <btylrob>
-
-COMMANDS:
-  	-s, --store       Encrypt and store a new API key
-  	-r, --retrieve    Decrypt and display stored API keys
-	-d, --delete 	  Deletes stored API key
-  	-l, --list        Show encrypted API keys
-  	-h, --help        Display this help menu
-	-v, --version     Display version
-	-b, --back 		  Goes back to main menu
+	fmt.Println(boldPink + `
+	CLI-based encryption tool for API keys and tokens.
+	
+	USAGE:
+	  A CLI locker for API keys and tokens using AES-256-GCM encryption.
+	
+	AUTHOR(S):
+	  Bran Robinson <btylrob>
+	
+	COMMANDS:
+	  -s, --store      Encrypt and store a new API key
+	  -r, --retrieve   Decrypt and display stored API keys
+	  -d, --delete     Delete a stored API key
+	  -l, --list       Show encrypted API keys
+	  -h, --help       Display this help menu
+	  -v, --version    Display version
+	  -b, --back       Go back to the main menu
 	`)
 
 	for {
