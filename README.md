@@ -3,6 +3,10 @@
  APIKitten is an open-source command line program that I built over the weekend to solve my problem of storing API keys in compormisable applications.
  This CLI helps store and retrieve api keys using diffrienetial password protection and [AES Go library](https://pkg.go.dev/crypto/aes) to encrpyt sensitive data...
 
+## Demo
+
+<img src="https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif" width="40" height="40" />
+
 ## Installation
 
 Install via go
